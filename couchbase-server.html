@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    RED.nodes.registerType('server',{
+        category: 'config',
+        credentials: {
+            username: {type: "text", required:true},
+            password: {type: "password"}
+        },
+        defaults: {
+            host: {value:"localhost",required:true},
+        },
+        label: function() {
+            return this.host + ' (' + this.credentials.username + ')';
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="server">
+    <div class="form-row">
+        <label for="node-config-input-host"><i class="fa fa-server"></i> Host</label>
+        <input type="text" id="node-config-input-host" placeholder="Host">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-username"><i class="fa fa-user-circle"></i> Username</label>
+        <input type="text" id="node-config-input-username" placeholder="Username">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-password"><i class="fa fa-user-secret"></i> Password</label>
+        <input type="password" id="node-config-input-password" placeholder="Password">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="server">
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>Host <span class="property-type">string</span></dt>
+        <dd>The DNS host name or IP of the couchbase cluster</dd>
+        <dt>Username <span class="property-type">string</span></dt>
+        <dd>The username to access the Couchbase bucket</dd>
+        <dt>Password <span class="property-type">string</span></dt>
+        <dd>The password to access the Couchbase bucket</dd>
+    </dl>
+</script>

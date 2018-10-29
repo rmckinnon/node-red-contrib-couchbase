@@ -1,0 +1,21 @@
+{
+  "name": "node-red-contrib-couchbase",
+  "version": "1.0.0",
+  "description": "Couchbase node for node-red",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Robert McKinnon",
+  "license": "ISC",
+  "node-red": {
+    "nodes": {
+      "insert": "couchbase-insert.js",
+      "upsert": "couchbase-upsert.js",
+      "server": "couchbase-server.js"
+    }
+  },
+  "dependencies": {
+    "couchbase": "^2.6.0",
+    "uuid": "^3.3.2"
+  }
+}

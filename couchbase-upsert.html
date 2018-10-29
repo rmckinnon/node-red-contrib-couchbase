@@ -1,0 +1,65 @@
+<script type="text/javascript">
+    RED.nodes.registerType('upsert',{
+        category: 'Couchbase',
+        color: '#FFAAAA',
+        credentials: {
+            username: {type: "text"},
+            password: {type: "password"}
+        },
+        defaults: {
+            name: {value:""},
+            host: {value:"localhost"},
+            bucket: {value:""},
+            server: {value:"", type:"server"}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "db.png",
+        label: function() {
+            return this.name||"upsert";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="upsert">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-bucket"><i class="fa fa-inbox"></i> Bucket</label>
+        <input type="text" id="node-input-bucket" placeholder="Bucket">
+    </div>
+    <div class="form-row">
+        <label for="node-input-server"><i class="fa fa-server"></i> Server</label>
+        <input type="text" id="node-input-server" placeholder="Server">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="upsert">
+    <p>Upsert JSON record into Couchbase</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>Name <span class="property-type">string</span></dt>
+        <dd>The name of the node.</dd>
+        <dt>Bucket <span class="property-type">string</span></dt>
+        <dd>The name of the Couchbase bucket.</dd>
+    </dl>
+    <h3>Details</h3>
+    <p><code>msg.payload</code> the JSON object to be persisted to Couchbase.</p>
+
+    <p>If <code>msg.record_id</code> exists then that will be used as the record 
+    identifier when inserting the record otherwise a uuid will be generated</p>
+
+    <h3>Issues</h3>
+    <p><strong>Note:</strong><br/>
+    couchbase driver version <strong>2.6.0</strong><br/>
+    there is a throttling issue that has been observed on the mac. If you do too 
+    many inserts the couchbase driver will throw an unrecoverable error. The solution 
+    at the time of writing this node is to build in a delay for your inserts.</p> 
+
+    <p>To get detailed logs from the Couchbase javascript driver set environment variable 
+    LCB_LOGLEVEL to 5. This will output a scheduling log message something like: 
+    <blockquote>Scheduling next timeout for 2500 ms. This is not an error</blockquote>
+    As the driver is inundated with requests, the timeout will shrink to 0 ms and fail.</p>
+</script>
