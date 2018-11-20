@@ -11,6 +11,7 @@
     "nodes": {
       "insert": "couchbase-insert.js",
       "upsert": "couchbase-upsert.js",
+      "n1ql": "couchbase-n1ql.js",
       "server": "couchbase-server.js"
     }
   },
